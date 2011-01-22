@@ -13,6 +13,17 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		921B004512EB753A00A7D51E /* template.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 921B004312EB753A00A7D51E /* template.fsh */; };
+		921B004612EB753A00A7D51E /* template.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 921B004412EB753A00A7D51E /* template.vsh */; };
+		921B005412EB754100A7D51E /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B004812EB754100A7D51E /* EAGLView.m */; };
+		921B005512EB754100A7D51E /* ES1Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B004A12EB754100A7D51E /* ES1Renderer.m */; };
+		921B005612EB754100A7D51E /* ES2Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B004C12EB754100A7D51E /* ES2Renderer.m */; };
+		921B005712EB754100A7D51E /* ES2RendererExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B004E12EB754100A7D51E /* ES2RendererExample.m */; };
+		921B005812EB754100A7D51E /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 921B005012EB754100A7D51E /* matrix.c */; };
+		921B005912EB754100A7D51E /* Shaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B005312EB754100A7D51E /* Shaders.m */; };
+		921B005D12EB757C00A7D51E /* ES1RendererExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B005C12EB757C00A7D51E /* ES1RendererExample.m */; };
+		921B006212EB75C200A7D51E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 921B006112EB75C200A7D51E /* OpenGLES.framework */; };
+		921B006612EB75C800A7D51E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 921B006512EB75C800A7D51E /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +37,25 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* GLESSample_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLESSample_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* GLESSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GLESSample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		921B004312EB753A00A7D51E /* template.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = template.fsh; sourceTree = "<group>"; };
+		921B004412EB753A00A7D51E /* template.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = template.vsh; sourceTree = "<group>"; };
+		921B004712EB754100A7D51E /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		921B004812EB754100A7D51E /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		921B004912EB754100A7D51E /* ES1Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1Renderer.h; sourceTree = "<group>"; };
+		921B004A12EB754100A7D51E /* ES1Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ES1Renderer.m; sourceTree = "<group>"; };
+		921B004B12EB754100A7D51E /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2Renderer.h; sourceTree = "<group>"; };
+		921B004C12EB754100A7D51E /* ES2Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ES2Renderer.m; sourceTree = "<group>"; };
+		921B004D12EB754100A7D51E /* ES2RendererExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES2RendererExample.h; sourceTree = "<group>"; };
+		921B004E12EB754100A7D51E /* ES2RendererExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ES2RendererExample.m; sourceTree = "<group>"; };
+		921B004F12EB754100A7D51E /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
+		921B005012EB754100A7D51E /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
+		921B005112EB754100A7D51E /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
+		921B005212EB754100A7D51E /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
+		921B005312EB754100A7D51E /* Shaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shaders.m; sourceTree = "<group>"; };
+		921B005B12EB757C00A7D51E /* ES1RendererExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1RendererExample.h; sourceTree = "<group>"; };
+		921B005C12EB757C00A7D51E /* ES1RendererExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ES1RendererExample.m; sourceTree = "<group>"; };
+		921B006112EB75C200A7D51E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		921B006512EB75C800A7D51E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +66,8 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				921B006212EB75C200A7D51E /* OpenGLES.framework in Frameworks */,
+				921B006612EB75C800A7D51E /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,8 +77,23 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				921B004712EB754100A7D51E /* EAGLView.h */,
+				921B004812EB754100A7D51E /* EAGLView.m */,
+				921B004912EB754100A7D51E /* ES1Renderer.h */,
+				921B004A12EB754100A7D51E /* ES1Renderer.m */,
+				921B005B12EB757C00A7D51E /* ES1RendererExample.h */,
+				921B005C12EB757C00A7D51E /* ES1RendererExample.m */,
+				921B004B12EB754100A7D51E /* ES2Renderer.h */,
+				921B004C12EB754100A7D51E /* ES2Renderer.m */,
+				921B004D12EB754100A7D51E /* ES2RendererExample.h */,
+				921B004E12EB754100A7D51E /* ES2RendererExample.m */,
+				921B004F12EB754100A7D51E /* ESRenderer.h */,
 				1D3623240D0F684500981E51 /* GLESSampleAppDelegate.h */,
 				1D3623250D0F684500981E51 /* GLESSampleAppDelegate.m */,
+				921B005012EB754100A7D51E /* matrix.c */,
+				921B005112EB754100A7D51E /* matrix.h */,
+				921B005212EB754100A7D51E /* Shaders.h */,
+				921B005312EB754100A7D51E /* Shaders.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -83,6 +130,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				921B004212EB753A00A7D51E /* Shaders */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* GLESSample-Info.plist */,
 			);
@@ -95,8 +143,20 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				921B006112EB75C200A7D51E /* OpenGLES.framework */,
+				921B006512EB75C800A7D51E /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		921B004212EB753A00A7D51E /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				921B004312EB753A00A7D51E /* template.fsh */,
+				921B004412EB753A00A7D51E /* template.vsh */,
+			);
+			name = Shaders;
+			path = Resources/Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +208,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				921B004512EB753A00A7D51E /* template.fsh in Resources */,
+				921B004612EB753A00A7D51E /* template.vsh in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +223,13 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* GLESSampleAppDelegate.m in Sources */,
+				921B005412EB754100A7D51E /* EAGLView.m in Sources */,
+				921B005512EB754100A7D51E /* ES1Renderer.m in Sources */,
+				921B005612EB754100A7D51E /* ES2Renderer.m in Sources */,
+				921B005712EB754100A7D51E /* ES2RendererExample.m in Sources */,
+				921B005812EB754100A7D51E /* matrix.c in Sources */,
+				921B005912EB754100A7D51E /* Shaders.m in Sources */,
+				921B005D12EB757C00A7D51E /* ES1RendererExample.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

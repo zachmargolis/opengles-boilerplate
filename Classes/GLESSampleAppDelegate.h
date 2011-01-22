@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class EAGLView;
+
 @interface GLESSampleAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
+    EAGLView *glview;
+    
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
