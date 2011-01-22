@@ -15,6 +15,7 @@
 {
 @private
 	EAGLContext *context;
+    UIView *view;
 	
 	// The pixel dimensions of the CAEAGLLayer
 	GLint backingWidth;

@@ -15,6 +15,7 @@
 @interface ES1Renderer : NSObject <ESRenderer>
 {
 	EAGLContext *context;
+    UIView *view;
 	
 	// The pixel dimensions of the CAEAGLLayer
 	GLint backingWidth;

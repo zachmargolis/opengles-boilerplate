@@ -16,6 +16,9 @@
 
 @implementation ES2Renderer
 
+@synthesize view;
+@synthesize context;
+
 #pragma mark Initialization
 
 // Create an ES 2.0 context

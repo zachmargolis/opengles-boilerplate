@@ -16,6 +16,7 @@
 
 @implementation ES1Renderer
 
+@synthesize view;
 @synthesize context;
 
 #pragma mark Initialization

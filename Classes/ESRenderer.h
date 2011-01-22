@@ -14,6 +14,8 @@
 @protocol ESRenderer <NSObject>
 
 @required
+@property(nonatomic, assign) UIView *view;
+@property(nonatomic, readonly) EAGLContext *context;
 - (void)render;
 - (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
 

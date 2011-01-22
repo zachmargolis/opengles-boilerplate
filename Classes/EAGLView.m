@@ -95,6 +95,7 @@ NSDictionary *EAGLViewDefaultOptionsTransparent = nil;
     
     if (theRenderer) {
         self.renderer = theRenderer;
+        renderer.view = self;
     } else {
         [self release];
         return nil;
