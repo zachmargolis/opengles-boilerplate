@@ -1,13 +1,13 @@
-//
-//  ES2RendererExample.h
-//  sig
-//
-//  Created by Zach Margolis on 1/22/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ 
+ File: ES2RendererExample.h
+
+ Created by Zach Margolis on 1/22/10
+ Based on Apple, Inc's sample code
+
+*/
 
 #import <Foundation/Foundation.h>
-
 #import "ES2Renderer.h"
 
 @interface ES2RendererExample : ES2Renderer {

@@ -1,10 +1,11 @@
-//
-//  ES2RendererExample.m
-//  sig
-//
-//  Created by Zach Margolis on 1/22/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ 
+ File: ES2RendererExample.m
+
+ Created by Zach Margolis on 1/22/10
+ Based on Apple, Inc's sample code
+
+*/
 
 #import "ES2RendererExample.h"
 #import "Shaders.h"

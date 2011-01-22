@@ -1,13 +1,13 @@
-//
-//  ES1RendererExample.m
-//  GLESSample
-//
-//  Created by Zach Margolis on 1/22/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ 
+ File: ES1RendererExample.h
+
+ Created by Zach Margolis on 1/22/10
+ Based on Apple, Inc's sample code
+
+*/
 
 #import "ES1RendererExample.h"
-
 
 @implementation ES1RendererExample
 

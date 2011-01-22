@@ -1,12 +1,13 @@
 /*
  
  File: EAGLView.m
- 
+
+ Created by Zach Margolis on 1/22/10
+ Based on Apple, Inc's sample code
+
 */
 
 #import "EAGLView.h"
-
-
 
 
 

@@ -1,10 +1,11 @@
-//
-//  GLESSampleAppDelegate.m
-//  GLESSample
-//
-//  Created by Zach Margolis on 1/22/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ 
+ File: GLESSampleAppDelegate.m
+
+ Created by Zach Margolis on 1/22/10
+ Based on Apple, Inc's sample code
+
+*/
 
 #import "GLESSampleAppDelegate.h"
 #import "EAGLView.h"

@@ -1,10 +1,10 @@
-//
-//  GLESSampleAppDelegate.h
-//  GLESSample
-//
-//  Created by Zach Margolis on 1/22/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
+/*
+ 
+ File: GLESSampleAppDelegate.h
+
+ Created by Zach Margolis on 1/22/10
+
+*/
 
 #import <UIKit/UIKit.h>
 

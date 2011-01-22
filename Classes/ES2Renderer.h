@@ -1,11 +1,13 @@
 /*
  
  File: ES2Renderer.h
- 
+
+ Created by Zach Margolis on 1/22/10
+ Based on Apple, Inc's sample code
+
 */
 
 #import "ESRenderer.h"
-
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
