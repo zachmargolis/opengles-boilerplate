@@ -1,0 +1,10 @@
+OpenGL ES Boilerplate
+
+There are a lot of conflicting OpenGL ES template files out there, and not all are easily extensible. This project aims to provide a flexible and extensible set of OpenGL classes.
+
+
+Important Pieces
+- EAGLView: is a UIView that takes an ESRenderer.
+- ESRenderer: a protocol that provides a common abstraction for the incompatible ES1 and ES2 implementations
+- ES1Renderer: an implementation of the ESRenderer protocol with methods appopriate for ES1 devices
+- ES2Renderer: same thing, but for ES2
