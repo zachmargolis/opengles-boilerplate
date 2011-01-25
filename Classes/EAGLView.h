@@ -34,6 +34,8 @@ extern NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking;
     CGRect cropArea;
 }
 
++ (EAGLView *)currentEAGLView;
+
 @property (nonatomic, readonly, retain) id<ESRenderer> renderer;
 @property (nonatomic, readonly, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;

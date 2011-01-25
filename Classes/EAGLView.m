@@ -22,7 +22,11 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
 
 
 @interface EAGLView ()
+
++ (void)setCurrentEAGLView:(EAGLView *)view;
+
 @property(nonatomic, readwrite, retain) id<ESRenderer> renderer;
+
 - (id)_initHelper:(id<ESRenderer>)renderer options:(NSDictionary *)options;
 @end
 
@@ -51,6 +55,18 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
     EAGLViewDefaultDrawableProperties = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
     EAGLViewDefaultOptionsTransparent = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], EAGLViewOptionsOpaqueKey, nil];
     EAGLViewDefaultOptionsTransparentRetainedBacking = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], EAGLViewOptionsOpaqueKey, [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil], EAGLViewOptionsDrawablePropertiesKey, nil];
+}
+
+static EAGLView *currentEAGLView = nil;
+
++ (EAGLView *)currentEAGLView;
+{
+    return currentEAGLView;
+}
+
++ (void)setCurrentEAGLView:(EAGLView *)view;
+{
+    currentEAGLView = view;
 }
 
 #pragma mark Initialization
@@ -193,8 +209,23 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
     // round up to the nearest 32pt size
     CGRect newFrame = CGRectMake(aFrame.origin.x, aFrame.origin.y, 32.0f * (CGFloat)ceil(aFrame.size.width / 32.0f), 32.0f * (CGFloat)ceil(aFrame.size.height / 32.0f));
     [super setFrame:newFrame];
-    
-    self.cropArea = aFrame;
+
+    self.cropArea = CGRectMake(0, 0, aFrame.size.width, aFrame.size.height);
+}
+
+- (void)didMoveToSuperview;
+{
+    // check when moving in or out of a superview
+    // if superview is non-nil, then we must have been added to a view
+    if (self.superview) {
+        [EAGLView setCurrentEAGLView:self];
+        [self layoutSubviews];
+        [self startAnimation];
+    } else if (!self.superview && self == [EAGLView currentEAGLView]) {
+        [EAGLView setCurrentEAGLView:nil];
+        [self stopAnimation];
+    }
+
 }
 
 - (void)setAnimationFrameInterval:(NSInteger)frameInterval;
