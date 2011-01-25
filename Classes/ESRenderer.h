@@ -11,10 +11,12 @@
 #import <OpenGLES/EAGL.h>
 #import <OpenGLES/EAGLDrawable.h>
 
+@class EAGLView;
+
 @protocol ESRenderer <NSObject>
 
 @required
-@property(nonatomic, assign) UIView *view;
+@property(nonatomic, assign) EAGLView *view;
 @property(nonatomic, readonly) EAGLContext *context;
 - (void)render;
 - (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;

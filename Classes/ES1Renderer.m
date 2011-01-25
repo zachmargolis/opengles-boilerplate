@@ -8,6 +8,7 @@
 */
 
 #import "ES1Renderer.h"
+#import "EAGLView.h"
 
 @interface ES1Renderer (PrivateMethods)
 - (void)createFramebuffer;

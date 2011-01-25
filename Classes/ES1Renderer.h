@@ -15,7 +15,7 @@
 @interface ES1Renderer : NSObject <ESRenderer>
 {
 	EAGLContext *context;
-    UIView *view;
+    EAGLView *view;
 	
 	// The pixel dimensions of the CAEAGLLayer
 	GLint backingWidth;
@@ -26,6 +26,7 @@
 }
 
 @property(nonatomic, readonly) EAGLContext *context;
+@property(nonatomic, assign) EAGLView *view;
 
 - (void)render;
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;

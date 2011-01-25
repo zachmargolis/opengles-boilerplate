@@ -17,6 +17,7 @@ extern NSString *EAGLViewOptionsOpaqueKey;
 extern NSString *EAGLViewOptionsDrawablePropertiesKey;
 
 extern NSDictionary *EAGLViewDefaultOptionsTransparent;
+extern NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking;
 
 // This class wraps the CAEAGLLayer from CoreAnimation into a convenient UIView subclass.
 // The view content is basically an EAGL surface you render your OpenGL scene into.
@@ -29,11 +30,14 @@ extern NSDictionary *EAGLViewDefaultOptionsTransparent;
 	NSInteger animationFrameInterval;
 
 	CADisplayLink *displayLink;
+    
+    CGRect cropArea;
 }
 
 @property (nonatomic, readonly, retain) id<ESRenderer> renderer;
 @property (nonatomic, readonly, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
+@property (nonatomic, assign) CGRect cropArea;
 
 // an EAGLView must be initialized with a non-nil renderer. options may be nil if defaults are acceptable
 - (id)initWithFrame:(CGRect)frame renderer:(id<ESRenderer>)theRenderer options:(NSDictionary *)options;

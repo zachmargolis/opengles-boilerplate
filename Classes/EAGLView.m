@@ -16,6 +16,8 @@ NSString *EAGLViewOptionsDrawablePropertiesKey = @"EAGLViewOptionsDrawableProper
 
 NSDictionary *EAGLViewDefaultDrawableProperties = nil;
 NSDictionary *EAGLViewDefaultOptionsTransparent = nil;
+NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
+
 
 
 
@@ -32,6 +34,7 @@ NSDictionary *EAGLViewDefaultOptionsTransparent = nil;
 @synthesize animating;
 @dynamic animationFrameInterval;
 @synthesize renderer;
+@synthesize cropArea;
 
 
 #pragma mark Static Methods
@@ -47,6 +50,7 @@ NSDictionary *EAGLViewDefaultOptionsTransparent = nil;
     // Prepare default options
     EAGLViewDefaultDrawableProperties = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
     EAGLViewDefaultOptionsTransparent = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], EAGLViewOptionsOpaqueKey, nil];
+    EAGLViewDefaultOptionsTransparentRetainedBacking = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], EAGLViewOptionsOpaqueKey, [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil], EAGLViewOptionsDrawablePropertiesKey, nil];
 }
 
 #pragma mark Initialization
@@ -184,7 +188,16 @@ NSDictionary *EAGLViewDefaultOptionsTransparent = nil;
 
 #pragma mark Properties
 
-- (void) setAnimationFrameInterval:(NSInteger)frameInterval;
+- (void)setFrame:(CGRect)aFrame;
+{
+    // round up to the nearest 32pt size
+    CGRect newFrame = CGRectMake(aFrame.origin.x, aFrame.origin.y, 32.0f * (CGFloat)ceil(aFrame.size.width / 32.0f), 32.0f * (CGFloat)ceil(aFrame.size.height / 32.0f));
+    [super setFrame:newFrame];
+    
+    self.cropArea = aFrame;
+}
+
+- (void)setAnimationFrameInterval:(NSInteger)frameInterval;
 {
 	// Frame interval defines how many display frames must pass between each time the
 	// display link fires. The display link will only fire 30 times a second when the

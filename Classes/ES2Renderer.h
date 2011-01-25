@@ -10,12 +10,13 @@
 #import "ESRenderer.h"
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
+#import "EAGLView.h"
 
 @interface ES2Renderer : NSObject <ESRenderer>
 {
 @private
 	EAGLContext *context;
-    UIView *view;
+    EAGLView *view;
 	
 	// The pixel dimensions of the CAEAGLLayer
 	GLint backingWidth;
@@ -24,6 +25,9 @@
 	// The OpenGL names for the framebuffer and renderbuffer used to render to this view
 	GLuint defaultFramebuffer, colorRenderbuffer;
 }
+
+@property(nonatomic, readonly) EAGLContext *context;
+@property(nonatomic, assign) EAGLView *view;
 
 - (void)render;
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;
