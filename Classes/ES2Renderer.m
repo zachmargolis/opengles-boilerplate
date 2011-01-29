@@ -24,7 +24,7 @@
 // Create an ES 2.0 context
 - (id <ESRenderer>) init;
 {
-	if (!(self = [super init])) {
+    if (!(self = [super init])) {
         return nil;
     }
     
@@ -37,24 +37,24 @@
     
     [self createFramebuffer];
 
-	return self;
+    return self;
 }
 
 - (void) dealloc;
 {
-	// tear down GL
+    // tear down GL
     [self deleteFramebuffer];
     [self deleteShaders];
 
-	// tear down context
-	if ([EAGLContext currentContext] == context) {
+    // tear down context
+    if ([EAGLContext currentContext] == context) {
         [EAGLContext setCurrentContext:nil];
     }
-	
-	[context release];
-	context = nil;
-	
-	[super dealloc];
+    
+    [context release];
+    context = nil;
+    
+    [super dealloc];
 }
 
 #pragma mark Rendering
@@ -70,17 +70,17 @@
 
 - (BOOL)resizeFromLayer:(CAEAGLLayer *)layer;
 {
-	// Allocate color buffer backing based on the current layer size
+    // Allocate color buffer backing based on the current layer size
     glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
     [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
-	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);
+    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);
-	
+    
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
         NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
         return NO;
     }
-	
+    
     return YES;
 }
 
@@ -96,15 +96,15 @@
 
 - (void)deleteFramebuffer;
 {
-	if (defaultFramebuffer) {
-		glDeleteFramebuffers(1, &defaultFramebuffer);
-		defaultFramebuffer = 0;
-	}
-	
-	if (colorRenderbuffer) {
-		glDeleteRenderbuffers(1, &colorRenderbuffer);
-		colorRenderbuffer = 0;
-	}
+    if (defaultFramebuffer) {
+        glDeleteFramebuffers(1, &defaultFramebuffer);
+        defaultFramebuffer = 0;
+    }
+    
+    if (colorRenderbuffer) {
+        glDeleteRenderbuffers(1, &colorRenderbuffer);
+        colorRenderbuffer = 0;
+    }
 }
 
 - (void)setFramebuffer;

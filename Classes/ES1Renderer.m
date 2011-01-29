@@ -25,7 +25,7 @@
 // Create an ES 1.1 context
 - (id <ESRenderer>) init
 {
-	if (!(self = [super init])) {
+    if (!(self = [super init])) {
         return nil;
     }
     
@@ -38,23 +38,23 @@
     
     // Create default framebuffer object. The backing will be allocated for the current layer in -resizeFromLayer
     [self createFramebuffer];
-	
-	return self;
+    
+    return self;
 }
 
 - (void) dealloc
 {
     [self deleteFramebuffer];
 
-	// Tear down context
-	if ([EAGLContext currentContext] == context) {
+    // Tear down context
+    if ([EAGLContext currentContext] == context) {
         [EAGLContext setCurrentContext:nil];
-	}
+    }
 
-	[context release];
-	context = nil;
-	
-	[super dealloc];
+    [context release];
+    context = nil;
+    
+    [super dealloc];
 }
 
 #pragma mark Rendering
@@ -67,15 +67,15 @@
 #pragma mark Framebuffer Methods
 
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer
-{	
-	// Allocate color buffer backing based on the current layer size
+{    
+    // Allocate color buffer backing based on the current layer size
     glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
     [context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
-	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
+    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
     glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
-	
+    
     if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
-		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
+        NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
         return NO;
     }
     

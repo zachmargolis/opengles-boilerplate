@@ -7,6 +7,6 @@ varying vec4 colorVarying;
 
 void main()
 {
-	gl_Position = modelViewProjectionMatrix * position;
-	colorVarying = color;
+    gl_Position = modelViewProjectionMatrix * position;
+    colorVarying = color;
 }

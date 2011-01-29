@@ -11,10 +11,10 @@
 #import "ES2Renderer.h"
 
 @interface ES2RendererExample : ES2Renderer {
-	/* the shader program object */
-	GLuint program;
-	
-	GLfloat rotz;
+    /* the shader program object */
+    GLuint program;
+    
+    GLfloat rotz;
 }
 
 @end

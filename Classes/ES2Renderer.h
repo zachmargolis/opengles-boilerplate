@@ -15,15 +15,15 @@
 @interface ES2Renderer : NSObject <ESRenderer>
 {
 @private
-	EAGLContext *context;
+    EAGLContext *context;
     EAGLView *view;
-	
-	// The pixel dimensions of the CAEAGLLayer
-	GLint backingWidth;
-	GLint backingHeight;
-	
-	// The OpenGL names for the framebuffer and renderbuffer used to render to this view
-	GLuint defaultFramebuffer, colorRenderbuffer;
+    
+    // The pixel dimensions of the CAEAGLLayer
+    GLint backingWidth;
+    GLint backingHeight;
+    
+    // The OpenGL names for the framebuffer and renderbuffer used to render to this view
+    GLuint defaultFramebuffer, colorRenderbuffer;
 }
 
 @property(nonatomic, readonly) EAGLContext *context;

@@ -32,7 +32,7 @@
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrthof(-1.0f, 1.0f, -1.5f, 1.5f, -1.0f, 1.0f);
-	glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_MODELVIEW);
     glRotatef(3.0f, 0.0f, 0.0f, 1.0f);
     
     glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
