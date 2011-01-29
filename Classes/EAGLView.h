@@ -24,20 +24,20 @@ extern NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking;
 // Note that setting the view non-opaque will only work if the EAGL surface has an alpha channel.
 @interface EAGLView : UIView
 {    
-	id <ESRenderer> renderer;
-	
-	BOOL animating;
-	NSInteger animationFrameInterval;
+    id <ESRenderer> renderer;
+    
+    BOOL animating;
+    NSInteger animationFrameInterval;
 
-	CADisplayLink *displayLink;
+    CADisplayLink *displayLink;
     
     CGRect cropArea;
+    BOOL activateWhenApplicationBecomesActive;
 }
-
-+ (EAGLView *)currentEAGLView;
 
 @property (nonatomic, readonly, retain) id<ESRenderer> renderer;
 @property (nonatomic, readonly, getter=isAnimating) BOOL animating;
+@property (nonatomic, assign, getter=shouldActivateWhenApplicationBecomesActive) BOOL activateWhenApplicationBecomesActive;
 @property (nonatomic) NSInteger animationFrameInterval;
 @property (nonatomic, assign) CGRect cropArea;
 

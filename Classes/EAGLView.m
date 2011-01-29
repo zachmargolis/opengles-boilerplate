@@ -23,8 +23,6 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
 
 @interface EAGLView ()
 
-+ (void)setCurrentEAGLView:(EAGLView *)view;
-
 @property(nonatomic, readwrite, retain) id<ESRenderer> renderer;
 
 - (id)_initHelper:(id<ESRenderer>)renderer options:(NSDictionary *)options;
@@ -39,6 +37,7 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
 @dynamic animationFrameInterval;
 @synthesize renderer;
 @synthesize cropArea;
+@synthesize activateWhenApplicationBecomesActive;
 
 
 #pragma mark Static Methods
@@ -55,18 +54,6 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
     EAGLViewDefaultDrawableProperties = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil];
     EAGLViewDefaultOptionsTransparent = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], EAGLViewOptionsOpaqueKey, nil];
     EAGLViewDefaultOptionsTransparentRetainedBacking = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], EAGLViewOptionsOpaqueKey, [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking, kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat, nil], EAGLViewOptionsDrawablePropertiesKey, nil];
-}
-
-static EAGLView *currentEAGLView = nil;
-
-+ (EAGLView *)currentEAGLView;
-{
-    return currentEAGLView;
-}
-
-+ (void)setCurrentEAGLView:(EAGLView *)view;
-{
-    currentEAGLView = view;
 }
 
 #pragma mark Initialization
@@ -95,8 +82,11 @@ static EAGLView *currentEAGLView = nil;
     // Get the layer
     CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
 
-    // set up the layer with options passed in (if there are any)
+    // set the scale to the screen scale (retina detect)
+    eaglLayer.contentsScale = [[UIScreen mainScreen] scale];
+    self.contentScaleFactor = [[UIScreen mainScreen] scale]; 
 
+    // set up the layer with options passed in (if there are any)
     NSNumber *opaqueOption = [options objectForKey:EAGLViewOptionsOpaqueKey];
     if (opaqueOption) {
         eaglLayer.opaque = [opaqueOption boolValue];
@@ -125,13 +115,23 @@ static EAGLView *currentEAGLView = nil;
     animationFrameInterval = 1;
     displayLink = nil;
     
+    // subscribe to relevant notifications
+
+    // start animating when application becomes active
+    self.activateWhenApplicationBecomesActive = YES;
+
+    // stop animating when application resigns active
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAnimating) name:UIApplicationWillResignActiveNotification object:[UIApplication sharedApplication]];
+
     return self;
 }
 
 - (void) dealloc;
 {
     [self.renderer release];
-	
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [super dealloc];
 }
 
@@ -169,7 +169,7 @@ static EAGLView *currentEAGLView = nil;
 
 - (void) layoutSubviews;
 {
-	[self.renderer resizeFromLayer:(CAEAGLLayer*)self.layer];
+    [self.renderer resizeFromLayer:(CAEAGLLayer*)self.layer];
     [self drawView:nil];
 }
 
@@ -182,23 +182,23 @@ static EAGLView *currentEAGLView = nil;
 
 - (void) startAnimation;
 {
-	if (!animating) {
+    if (!animating) {
         displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawView:)];
         [displayLink setFrameInterval:animationFrameInterval];
         [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     
         animating = YES;
-	}
+    }
 }
 
 - (void)stopAnimation;
 {
-	if (animating) {
+    if (animating) {
         [displayLink invalidate];
         displayLink = nil;
-		
-		animating = NO;
-	}
+        
+        animating = NO;
+    }
 }
 
 
@@ -213,37 +213,37 @@ static EAGLView *currentEAGLView = nil;
     self.cropArea = CGRectMake(0, 0, aFrame.size.width, aFrame.size.height);
 }
 
-- (void)didMoveToSuperview;
+- (void)setActivateWhenApplicationBecomesActive:(BOOL)activate;
 {
-    // check when moving in or out of a superview
-    // if superview is non-nil, then we must have been added to a view
-    if (self.superview) {
-        [EAGLView setCurrentEAGLView:self];
-        [self layoutSubviews];
-        [self startAnimation];
-    } else if (!self.superview && self == [EAGLView currentEAGLView]) {
-        [EAGLView setCurrentEAGLView:nil];
-        [self stopAnimation];
+    // if going from no to yes, subscribe to the relevant notifications
+    if (!activateWhenApplicationBecomesActive && activate) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimating) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     }
 
+    // if going from yes to no, unsubscribe from the relevant notifications
+    if (activateWhenApplicationBecomesActive && !activate) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+    }
+
+    activateWhenApplicationBecomesActive = activate;
 }
 
 - (void)setAnimationFrameInterval:(NSInteger)frameInterval;
 {
-	// Frame interval defines how many display frames must pass between each time the
-	// display link fires. The display link will only fire 30 times a second when the
-	// frame internal is two on a display that refreshes 60 times a second. The default
-	// frame interval setting of one will fire 60 times a second when the display refreshes
-	// at 60 times a second. A frame interval setting of less than one results in undefined
-	// behavior.
-	if (frameInterval >= 1) {
-		animationFrameInterval = frameInterval;
-		
-		if (animating) {
-			[self stopAnimation];
-			[self startAnimation];
-		}
-	}
+    // Frame interval defines how many display frames must pass between each time the
+    // display link fires. The display link will only fire 30 times a second when the
+    // frame internal is two on a display that refreshes 60 times a second. The default
+    // frame interval setting of one will fire 60 times a second when the display refreshes
+    // at 60 times a second. A frame interval setting of less than one results in undefined
+    // behavior.
+    if (frameInterval >= 1) {
+        animationFrameInterval = frameInterval;
+        
+        if (animating) {
+            [self stopAnimation];
+            [self startAnimation];
+        }
+    }
 }
 
 @end
