@@ -25,6 +25,7 @@
 		921B006212EB75C200A7D51E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 921B006112EB75C200A7D51E /* OpenGLES.framework */; };
 		921B006612EB75C800A7D51E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 921B006512EB75C800A7D51E /* QuartzCore.framework */; };
 		923F934712F4DAE0008D64B0 /* UITouch-EAGLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 923F934612F4DAE0008D64B0 /* UITouch-EAGLAdditions.m */; };
+		92EF213C133FDCE6004B3B1E /* GLErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EF213B133FDCE6004B3B1E /* GLErrors.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		921B006512EB75C800A7D51E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		923F934512F4DAE0008D64B0 /* UITouch-EAGLAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITouch-EAGLAdditions.h"; sourceTree = "<group>"; };
 		923F934612F4DAE0008D64B0 /* UITouch-EAGLAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITouch-EAGLAdditions.m"; sourceTree = "<group>"; };
+		92EF213A133FDCE6004B3B1E /* GLErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLErrors.h; sourceTree = "<group>"; };
+		92EF213B133FDCE6004B3B1E /* GLErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLErrors.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 				921B005312EB754100A7D51E /* Shaders.m */,
 				923F934512F4DAE0008D64B0 /* UITouch-EAGLAdditions.h */,
 				923F934612F4DAE0008D64B0 /* UITouch-EAGLAdditions.m */,
+				92EF213A133FDCE6004B3B1E /* GLErrors.h */,
+				92EF213B133FDCE6004B3B1E /* GLErrors.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				921B005912EB754100A7D51E /* Shaders.m in Sources */,
 				921B005D12EB757C00A7D51E /* ES1RendererExample.m in Sources */,
 				923F934712F4DAE0008D64B0 /* UITouch-EAGLAdditions.m in Sources */,
+				92EF213C133FDCE6004B3B1E /* GLErrors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

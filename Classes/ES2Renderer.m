@@ -8,10 +8,17 @@
 */
 
 #import "ES2Renderer.h"
+#import "GLErrors.h"
 
 @interface ES2Renderer (PrivateMethods)
+
 - (void)createFramebuffer;
 - (void)deleteFramebuffer;
+
+- (GLuint)_compileShaderOfType:(GLenum)type fromFiles:(NSArray *)fileNames error:(NSError **)error;
+- (GLint)_linkProgram:(GLuint)program error:(NSError **)error;
+- (GLint)_validateProgram:(GLuint)program error:(NSError **)error;
+
 @end
 
 @implementation ES2Renderer
@@ -132,6 +139,149 @@
 
 - (void)deleteShaders;
 {
+}
+
+- (GLuint)buildShaderProgramWithVertexShaders:(NSArray *)vertexShaderFileNames andFragmentShaders:(NSArray *)fragmentShaderFileNames error:(NSError **)error attributeBlock:(void (^)(GLuint program))attributeBlock uniformBlock:(void (^)(GLuint program))uniformBlock;
+{
+    GLuint vertexShader, fragmentShader, program;
+    
+    program = glCreateProgram();
+    
+    vertexShader = [self _compileShaderOfType:GL_VERTEX_SHADER fromFiles:vertexShaderFileNames error:error];
+    if (!vertexShader) {
+        return 0;
+    }
+    
+    fragmentShader = [self _compileShaderOfType:GL_FRAGMENT_SHADER fromFiles:fragmentShaderFileNames error:error];
+    if (!fragmentShader) {
+        return 0;
+    }
+    
+    glAttachShader(program, vertexShader);
+    glAttachShader(program, fragmentShader);
+    
+    // bind atttribute locations
+    // must happen before linking
+    attributeBlock(program);
+    
+    
+    if (![self _linkProgram:program error:error]) {
+        return 0;
+    }
+
+    // bind uniform locations
+    uniformBlock(program);
+
+    // successfully linked shader
+    return program;
+}
+
+- (void)deleteShaderProgram:(GLint)shader;
+{
+    if (shader) {
+        glDeleteProgram(shader);
+    }
+}
+
+#pragma mark Private Methods
+
+- (GLuint)_compileShaderOfType:(GLenum)type fromFiles:(NSArray *)fileNames error:(NSError **)error;
+{
+    GLuint shader;
+    
+    // TODO: document "vsh" and "fsh" as the filenames
+    NSString *fileType = type == GL_VERTEX_SHADER ? @"vsh" : @"fsh";
+    
+
+    NSInteger numberOfFiles = [fileNames count];
+    const GLchar *sources[numberOfFiles];
+    
+    for (NSUInteger file = 0; file < numberOfFiles; file++) {
+        NSString *location = [[NSBundle mainBundle] pathForResource:[fileNames objectAtIndex:file] ofType:fileType];
+        sources[file] = (GLchar *) [[NSString stringWithContentsOfFile:location encoding:NSUTF8StringEncoding error:error] UTF8String];
+        if (!sources[file]) {
+            return 0;
+        }
+    }
+    
+    shader = glCreateShader(type);
+    glShaderSource(shader, numberOfFiles, sources, NULL);
+    glCompileShader(shader);
+    
+#if defined(DEBUG)
+    GLint logLength;
+    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
+    if (logLength > 0)
+    {
+        GLchar *log = (GLchar *)malloc(logLength);
+        glGetShaderInfoLog(*shader, logLength, &logLength, log);
+        NSLog(@"Shader compile log:\n%s", log);
+        free(log);
+        return 0;
+    }
+#endif
+
+    GLint status;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+    if (status == GL_FALSE)
+    {
+        NSLog(@"Failed to compile shader:\n");
+        for (int i = 0; i < numberOfFiles; i++) {
+            NSLog(@"%s", sources[i]);
+        }
+        return 0;
+    }
+
+    return shader;
+}
+
+- (GLint)_linkProgram:(GLuint)program error:(NSError **)error;
+{
+    GLint status;
+    
+    glLinkProgram(program);
+    
+#if defined(DEBUG)
+    GLint logLength;
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
+    if (logLength > 0)
+    {
+        GLchar *log = (GLchar *)malloc(logLength);
+        glGetProgramInfoLog(program, logLength, &logLength, log);
+        NSLog(@"Program link log:\n%s", log);
+        free(log);
+    }
+#endif
+    
+    glGetProgramiv(program, GL_LINK_STATUS, &status);
+    if (status == GL_FALSE && error) {
+        *error = [NSError errorWithDomain:GLErrorDomain code:GLLinkError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:GLLinkErrorDescription, NSLocalizedDescriptionKey, nil]];
+        NSLog(@"Failed to link program %d", program);
+    }
+    
+    return status;
+}
+
+- (GLint)_validateProgram:(GLuint)program error:(NSError **)error;
+{
+    GLint logLength, status;
+    
+    glValidateProgram(program);
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
+    if (logLength > 0)
+    {
+        GLchar *log = (GLchar *)malloc(logLength);
+        glGetProgramInfoLog(program, logLength, &logLength, log);
+        NSLog(@"Program validate log:\n%s", log);
+        free(log);
+    }
+    
+    glGetProgramiv(program, GL_VALIDATE_STATUS, &status);
+    if (status == GL_FALSE) {
+        NSLog(@"Failed to validate program %d", program);
+    }
+    
+    return status;
 }
 
 @end

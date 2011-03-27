@@ -35,6 +35,9 @@
 - (BOOL)loadShaders;
 - (void)deleteShaders;
 
+- (GLuint)buildShaderProgramWithVertexShaders:(NSArray *)vertexShaderFileNames andFragmentShaders:(NSArray *)fragmentShaderFileNames error:(NSError **)error attributeBlock:(void (^)(GLuint program))attributeBlock uniformBlock:(void (^)(GLuint program))uniformBlock;
+- (void)deleteShaderProgram:(GLint)shader;
+
 - (void)setFramebuffer;
 - (BOOL)presentFramebuffer;
 

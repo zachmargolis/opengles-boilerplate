@@ -18,8 +18,12 @@
 @required
 @property(nonatomic, assign) EAGLView *view;
 @property(nonatomic, readonly) EAGLContext *context;
+
 - (void)render;
 - (BOOL)resizeFromLayer:(CAEAGLLayer*)layer;
+
+
+
 
 @optional
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
