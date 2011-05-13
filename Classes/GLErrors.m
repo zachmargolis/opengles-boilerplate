@@ -8,7 +8,8 @@
 
 #import "GLErrors.h"
 
+NSString *GLErrorDomain = @"GL Error Domain";
 
-@implementation GLErrors
-
-@end
+NSString *GLLinkErrorDescription = @"Error linking OpenGL shader";
+NSString *GLCompileErrorDescription = @"Error compiling OpenGL shader";
+NSString *GLLoadErrorDescription = @"Error loading OpenGL shader";

@@ -95,56 +95,16 @@ enum {
 
 - (BOOL)loadShaders;
 {
-    GLuint vertShader, fragShader;
-    NSString *vertShaderPathname, *fragShaderPathname;
-    
-    // create shader program
-    program = glCreateProgram();
-    
-    // create and compile vertex shader
-    vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"template" ofType:@"vsh"];
-    if (!compileShader(&vertShader, GL_VERTEX_SHADER, 1, vertShaderPathname)) {
-        destroyShaders(vertShader, fragShader, program);
-        return NO;
-    }
-    
-    // create and compile fragment shader
-    fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"template" ofType:@"fsh"];
-    if (!compileShader(&fragShader, GL_FRAGMENT_SHADER, 1, fragShaderPathname)) {
-        destroyShaders(vertShader, fragShader, program);
-        return NO;
-    }
-    
-    // attach vertex shader to program
-    glAttachShader(program, vertShader);
-    
-    // attach fragment shader to program
-    glAttachShader(program, fragShader);
-    
-    // bind attribute locations
-    // this needs to be done prior to linking
-    glBindAttribLocation(program, ATTRIB_VERTEX, "position");
-    glBindAttribLocation(program, ATTRIB_COLOR, "color");
-    
-    // link program
-    if (!linkProgram(program)) {
-        destroyShaders(vertShader, fragShader, program);
-        return NO;
-    }
-    
-    // get uniform locations
-    uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX] = glGetUniformLocation(program, "modelViewProjectionMatrix");
-    
-    // release vertex and fragment shaders
-    if (vertShader) {
-        glDeleteShader(vertShader);
-        vertShader = 0;
-    }
-    if (fragShader) {
-        glDeleteShader(fragShader);
-        fragShader = 0;
-    }
-    
+    NSError *error = nil;
+    program = [self buildShaderProgramWithVertexShaders:[NSArray arrayWithObject:@"template"] andFragmentShaders:[NSArray arrayWithObject:@"template"] error:&error attributeBlock:^(GLuint prog) {
+        // bind attribute locations
+        glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
+        glBindAttribLocation(prog, ATTRIB_COLOR, "color");
+    } uniformBlock:^(GLuint prog) {
+         // get uniform locations
+        uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX] = glGetUniformLocation(prog, "modelViewProjectionMatrix");
+    }];
+
     return YES;
 }
 

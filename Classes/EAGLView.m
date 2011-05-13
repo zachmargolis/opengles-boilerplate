@@ -217,7 +217,7 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
 {
     // if going from no to yes, subscribe to the relevant notifications
     if (!activateWhenApplicationBecomesActive && activate) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimating) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimation) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     }
 
     // if going from yes to no, unsubscribe from the relevant notifications

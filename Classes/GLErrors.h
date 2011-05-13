@@ -10,9 +10,12 @@
 
 extern NSString *GLErrorDomain;
 
-extern NSInteger GLLinkError;
-extern NSInteger GLCompileError;
-extern NSInteger GLLoadError;
+typedef enum {
+    GLNoError,
+    GLLinkError,
+    GLCompileError,
+    GLLoadError,
+} GLError;
 
 extern NSString *GLLinkErrorDescription;
 extern NSString *GLCompileErrorDescription;
