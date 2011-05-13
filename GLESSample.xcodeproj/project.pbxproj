@@ -20,7 +20,6 @@
 		921B005612EB754100A7D51E /* ES2Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B004C12EB754100A7D51E /* ES2Renderer.m */; };
 		921B005712EB754100A7D51E /* ES2RendererExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B004E12EB754100A7D51E /* ES2RendererExample.m */; };
 		921B005812EB754100A7D51E /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 921B005012EB754100A7D51E /* matrix.c */; };
-		921B005912EB754100A7D51E /* Shaders.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B005312EB754100A7D51E /* Shaders.m */; };
 		921B005D12EB757C00A7D51E /* ES1RendererExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 921B005C12EB757C00A7D51E /* ES1RendererExample.m */; };
 		921B006212EB75C200A7D51E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 921B006112EB75C200A7D51E /* OpenGLES.framework */; };
 		921B006612EB75C800A7D51E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 921B006512EB75C800A7D51E /* QuartzCore.framework */; };
@@ -52,8 +51,6 @@
 		921B004F12EB754100A7D51E /* ESRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESRenderer.h; sourceTree = "<group>"; };
 		921B005012EB754100A7D51E /* matrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
 		921B005112EB754100A7D51E /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
-		921B005212EB754100A7D51E /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
-		921B005312EB754100A7D51E /* Shaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shaders.m; sourceTree = "<group>"; };
 		921B005B12EB757C00A7D51E /* ES1RendererExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ES1RendererExample.h; sourceTree = "<group>"; };
 		921B005C12EB757C00A7D51E /* ES1RendererExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ES1RendererExample.m; sourceTree = "<group>"; };
 		921B006112EB75C200A7D51E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -98,8 +95,6 @@
 				1D3623250D0F684500981E51 /* GLESSampleAppDelegate.m */,
 				921B005012EB754100A7D51E /* matrix.c */,
 				921B005112EB754100A7D51E /* matrix.h */,
-				921B005212EB754100A7D51E /* Shaders.h */,
-				921B005312EB754100A7D51E /* Shaders.m */,
 				923F934512F4DAE0008D64B0 /* UITouch-EAGLAdditions.h */,
 				923F934612F4DAE0008D64B0 /* UITouch-EAGLAdditions.m */,
 				92EF213A133FDCE6004B3B1E /* GLErrors.h */,
@@ -238,7 +233,6 @@
 				921B005612EB754100A7D51E /* ES2Renderer.m in Sources */,
 				921B005712EB754100A7D51E /* ES2RendererExample.m in Sources */,
 				921B005812EB754100A7D51E /* matrix.c in Sources */,
-				921B005912EB754100A7D51E /* Shaders.m in Sources */,
 				921B005D12EB757C00A7D51E /* ES1RendererExample.m in Sources */,
 				923F934712F4DAE0008D64B0 /* UITouch-EAGLAdditions.m in Sources */,
 				92EF213C133FDCE6004B3B1E /* GLErrors.m in Sources */,

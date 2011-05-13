@@ -12,7 +12,7 @@
 
 @interface ES2RendererExample : ES2Renderer {
     /* the shader program object */
-    GLuint program;
+    GLuint shader;
     
     GLfloat rotz;
 }

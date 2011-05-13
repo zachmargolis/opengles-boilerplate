@@ -14,7 +14,6 @@
 
 @interface ES2Renderer : NSObject <ESRenderer>
 {
-@private
     EAGLContext *context;
     EAGLView *view;
     

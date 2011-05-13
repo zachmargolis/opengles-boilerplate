@@ -134,11 +134,13 @@
 
 - (BOOL)loadShaders;
 {
+    // should be overridden by a subclass
     return YES;
 }
 
 - (void)deleteShaders;
 {
+    // should be overridden by a subclass
 }
 
 - (GLuint)buildShaderProgramWithVertexShaders:(NSArray *)vertexShaderFileNames andFragmentShaders:(NSArray *)fragmentShaderFileNames error:(NSError **)error attributeBlock:(void (^)(GLuint program))attributeBlock uniformBlock:(void (^)(GLuint program))uniformBlock;

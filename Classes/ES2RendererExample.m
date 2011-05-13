@@ -8,7 +8,6 @@
 */
 
 #import "ES2RendererExample.h"
-#import "Shaders.h"
 #include "matrix.h"
 
 // uniform index
@@ -55,7 +54,7 @@ enum {
     glClear(GL_COLOR_BUFFER_BIT);
     
     // use shader program
-    glUseProgram(program);
+    glUseProgram(shader);
     
     // handle viewing matrices
     GLfloat proj[16], modelview[16], modelviewProj[16];
@@ -96,7 +95,7 @@ enum {
 - (BOOL)loadShaders;
 {
     NSError *error = nil;
-    program = [self buildShaderProgramWithVertexShaders:[NSArray arrayWithObject:@"template"] andFragmentShaders:[NSArray arrayWithObject:@"template"] error:&error attributeBlock:^(GLuint prog) {
+    shader = [self buildShaderProgramWithVertexShaders:[NSArray arrayWithObject:@"template"] andFragmentShaders:[NSArray arrayWithObject:@"template"] error:&error attributeBlock:^(GLuint prog) {
         // bind attribute locations
         glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
         glBindAttribLocation(prog, ATTRIB_COLOR, "color");
@@ -111,9 +110,9 @@ enum {
 - (void)deleteShaders;
 {
     // realease the shader program object
-    if (program) {
-        glDeleteProgram(program);
-        program = 0;
+    if (shader) {
+        glDeleteProgram(shader);
+        shader = 0;
     }
 }
 

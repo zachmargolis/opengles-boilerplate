@@ -102,7 +102,6 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
     }
 
     
-    
     if (theRenderer) {
         self.renderer = theRenderer;
         renderer.view = self;
@@ -213,19 +212,21 @@ NSDictionary *EAGLViewDefaultOptionsTransparentRetainedBacking = nil;
     self.cropArea = CGRectMake(0, 0, aFrame.size.width, aFrame.size.height);
 }
 
-- (void)setActivateWhenApplicationBecomesActive:(BOOL)activate;
+- (void)setActivateWhenApplicationBecomesActive:(BOOL)inActivate;
 {
-    // if going from no to yes, subscribe to the relevant notifications
-    if (!activateWhenApplicationBecomesActive && activate) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimation) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+    if (inActivate == activateWhenApplicationBecomesActive) {
+        return;
+    }
+    
+    if (inActivate) {
+        // if going from no to yes, subscribe to the relevant notifications
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimation) name:UIApplicationDidBecomeActiveNotification object:nil];
+    } else if (!inActivate) {
+        // if going from yes to no, unsubscribe from the relevant notifications
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
     }
 
-    // if going from yes to no, unsubscribe from the relevant notifications
-    if (activateWhenApplicationBecomesActive && !activate) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
-    }
-
-    activateWhenApplicationBecomesActive = activate;
+    activateWhenApplicationBecomesActive = inActivate;
 }
 
 - (void)setAnimationFrameInterval:(NSInteger)frameInterval;
