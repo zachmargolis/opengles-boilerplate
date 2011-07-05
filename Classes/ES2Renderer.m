@@ -216,7 +216,7 @@
     if (logLength > 0)
     {
         GLchar *log = (GLchar *)malloc(logLength);
-        glGetShaderInfoLog(*shader, logLength, &logLength, log);
+        glGetShaderInfoLog(shader, logLength, &logLength, log);
         NSLog(@"Shader compile log:\n%s", log);
         free(log);
         return 0;
