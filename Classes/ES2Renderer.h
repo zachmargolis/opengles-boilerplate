@@ -40,5 +40,8 @@
 - (void)setFramebuffer;
 - (BOOL)presentFramebuffer;
 
+- (void)loadTexture:(GLuint *)texture forImage:(UIImage *)image;
+- (void)deleteTexture:(GLuint *)texture;
+
 @end
 
